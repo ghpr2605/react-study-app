@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Table from "./Table";
-import displayData from "./data";
+import Form from "./Form";
 class App extends Component {
   state = {
-    persons: displayData,
+    persons: [],
   };
 
   removePersonData = (index) => {
@@ -13,14 +13,19 @@ class App extends Component {
     });
   };
 
+  handleSubmit = (persons) => {
+    this.setState({ persons: [...this.state.persons, persons] });
+  };
+
   render() {
     const { persons } = this.state;
     return (
-      <div className="App">
+      <div className="container">
         <Table
           displayData={persons}
           removePersonData={this.removePersonData}
         ></Table>
+        <Form handleSubmit={this.handleSubmit}></Form>
       </div>
     );
   }
